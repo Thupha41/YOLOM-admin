@@ -1,0 +1,68 @@
+/* AddProduct.css */
+.dropzone {
+    border: 2px dashed #d9d9d9;
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .dropzone:hover {
+    border-color: #1890ff;
+  }
+  
+  .showimages {
+    margin-top: 10px;
+  }
+  
+  .showimages .position-relative {
+    display: flex;
+    align-items: center;
+  }
+  
+  .showimages .position-relative span {
+    margin-right: 10px;
+  }
+  
+  .error {
+    color: red;
+    margin-top: 5px;
+  }
+  
+  .btn-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .card-body {
+    position: relative;
+    padding: 10px;
+  }
+
+  .card-header {
+    margin-bottom: 0;
+  }
+ 
+  .meta-boxes {
+    margin-bottom: 16px;
+  }
+  
+  .ant-table-thead > tr > th {
+    background-color: #fafafa;
+  }
+  
+  .ant-table-tbody > tr > td {
+    vertical-align: middle;
+  }
+  
+  .form-label {
+    font-size: .875rem;
+    margin-bottom: .5rem;
+    font-weight: 600;
+  }
+
+  label.required:after {
+    color: #d63939;
+    content: "*";
+    margin-left: .25rem;
+  }

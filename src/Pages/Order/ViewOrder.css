@@ -1,0 +1,78 @@
+.h-100 {
+    height: 100vh;
+  }
+  
+  .gradient-custom {
+    background: linear-gradient(87deg, #f8f9fe, #c2d5ff);
+  }
+  
+  .card {
+    border-radius: 10px;
+  }
+  
+  .card-header {
+    padding: 20px;
+    border-radius: 10px 10px 0 0;
+  }
+  
+  .card-footer {
+    background-color: #a8729a;
+    color: white;
+    border-radius: 0 0 10px 10px;
+  }
+  
+  .img-fluid {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .progress {
+    height: 6px;
+    border-radius: 16px;
+  }
+  
+  .progress-bar {
+    border-radius: 16px;
+    background-color: #a8729a;
+  }
+  
+  .text-muted {
+    color: #6c757d !important;
+  }
+  
+  .summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .summary-item.total {
+    font-weight: bold;
+  }
+  
+  .badge-status {
+    padding: 0.2em 0.6em;
+    border-radius: 0.25em;
+  }
+  
+  .badge-status.cancelled {
+    background-color: red;
+    color: white;
+  }
+  
+  .badge-status.pending {
+    background-color: gray;
+    color: white;
+  }
+  
+  .badge-status.confirmed {
+    background-color: green;
+    color: white;
+  }
+  
+  .badge-status.shipping {
+    background-color: blue;
+    color: white;
+  }
+  
