@@ -101,10 +101,10 @@ const columns = [
     dataIndex: "price",
     sorter: (a, b) => a.price - b.price,
   },
-  {
-    title: "Action",
-    dataIndex: "action",
-  },
+  // {
+  //   title: "Action",
+  //   dataIndex: "action",
+  // },
 ];
 
 const ProductList = () => {
@@ -115,7 +115,7 @@ const ProductList = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const [importProductId, setImportProductId] = useState(null);
+
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
@@ -131,21 +131,6 @@ const ProductList = () => {
     setSearchQuery(value);
     filterData(value, statusFilter);
   };
-  const handleEditClick = () => {
-    if (selectedRowKeys.length === 0) {
-      toast.error("No order is selected", {
-        autoClose: 3000,
-        position: "bottom-right",
-      });
-      notification.error({
-        message: "No order is selected",
-        description: "Please select an order to edit.",
-      });
-      return;
-    }
-    setImportProductId(selectedRowKeys[0]);
-    setIsModalVisible(true);
-  };
 
   const handleStatusChange = (value) => {
     setStatusFilter(value);
@@ -159,7 +144,7 @@ const ProductList = () => {
       if (search) {
         filtered = filtered.filter(
           (product) =>
-            product.Product.product_name
+            product.Product?.product_name
               .toLowerCase()
               .includes(search.toLowerCase()) ||
             product.sku_no.toLowerCase().includes(search.toLowerCase())
@@ -167,9 +152,16 @@ const ProductList = () => {
       }
       if (brand) {
         filtered = filtered.filter(
-          (product) => product.Product.Brand.name === brand
+          (product) => product.Product?.Brand?.name === brand
         );
       }
+      // Filter out products with 'N/A' values
+      filtered = filtered.filter(
+        (product) =>
+          product.Product?.product_name !== "N/A" &&
+          product.Product?.Brand?.name !== "N/A" &&
+          product.Product?.product_price !== "N/A"
+      );
       setFilteredData(filtered);
       setLoading(false);
     }, 1000);
@@ -235,32 +227,28 @@ const ProductList = () => {
     onChange: onSelectedRowKeysChange,
   };
 
-  const data1 = filteredData.map((product, index) => ({
-    key: index + 1,
-    image: product.sku_image?.[0] || "N/A",
-    sku: product.sku_no,
-    brand: product.Product?.Brand?.name || "N/A",
-    title: product.Product?.product_name || "N/A",
-    status: product.Product?.product_status || "Out of stock",
-    category: product.Product?.Catalogue?.name || "N/A",
-    color: product.sku_color || "N/A",
-    size: product.sku_size,
-    // quantity:
-    //   product.Product?.product_quantity !== undefined
-    //     ? product.Product.product_quantity === 0
-    //       ? product.sku_quantity || 0
-    //       : product.Product.product_quantity
-    //     : product.sku_quantity || 0,
-    quantity: product.sku_quantity || 0,
-    price: `${formatCurrency(product.Product?.product_price) || 0}đ`,
-    action: (
-      <div className="d-flex flex-column">
-        <Link className=" fs-3 text-danger" to="/">
-          <AiFillDelete />
-        </Link>
-      </div>
-    ),
-  }));
+  const data1 = filteredData
+    .filter((product) => product.product_id !== null)
+    .map((product, index) => ({
+      key: index + 1,
+      image: product.sku_image?.[0],
+      sku: product.sku_no,
+      brand: product.Product?.Brand?.name,
+      title: product.Product?.product_name,
+      status: product.Product?.product_status || "Out of stock",
+      category: product.Product?.Catalogue?.name,
+      color: product.sku_color,
+      size: product.sku_size,
+      quantity: product.sku_quantity || 0,
+      price: `${formatCurrency(product.Product?.product_price) || 0}đ`,
+      // action: (
+      //   <div className="d-flex flex-column">
+      //     <Link className=" fs-3 text-danger" to="/">
+      //       <AiFillDelete />
+      //     </Link>
+      //   </div>
+      // ),
+    }));
 
   return (
     <div>
@@ -269,7 +257,7 @@ const ProductList = () => {
         <div className="w-100 justify-content-between d-flex flex-wrap align-items-center gap-1">
           <div className="d-flex flex-wrap flex-md-nowrap align-items-center gap-1">
             {/* Edit */}
-            <Select
+            {/* <Select
               size="large"
               placeholder="Bulk action"
               style={{ width: 120 }}
@@ -285,23 +273,13 @@ const ProductList = () => {
               onCancel={() => setIsModalVisible(false)}
               centered
             >
-              <CustomInput
-                type="text"
-                label="Enter Quantity"
-                name="title"
-                // onChng={formik.handleChange}
-                // onBlr={formik.handleBlur}
-                // val={formik.values.title}
-              />
+              <CustomInput type="text" label="Enter Quantity" name="title" />
               <CustomInput
                 type="text"
                 label="Enter Product Name"
                 name="title"
-                // onChng={formik.handleChange}
-                // onBlr={formik.handleBlur}
-                // val={formik.values.title}
               />
-            </Modal>
+            </Modal> */}
             <Select
               size="large"
               placeholder="Filter by Brand"

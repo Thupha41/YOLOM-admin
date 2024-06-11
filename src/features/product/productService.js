@@ -4,7 +4,7 @@ import { base_url } from "../../utils/baseUrl";
 
 const getProducts = async () => {
   const response = await axios.get(
-    `${base_url}web/products/?limit=183&offset=0`
+    `${base_url}web/products/?limit=170&offset=0`
   );
   return response.data.metadata;
 };

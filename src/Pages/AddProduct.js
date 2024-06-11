@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import CustomInput from "../Components/CustomInput";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { toast } from "react-toastify";
 import * as yup from "yup";
@@ -85,7 +84,8 @@ const AddProduct = () => {
     validationSchema: schema,
     onSubmit: (values) => {
       const isDuplicate = productState.some(
-        (product) => product.Product.product_name === values.title
+        (product) =>
+          product.Product && product.Product.product_name === values.title
       );
 
       if (isDuplicate) {
@@ -119,6 +119,7 @@ const AddProduct = () => {
   useEffect(() => {
     if (isSuccess && createdProduct) {
       toast.success("Product Added Successfully!", { autoClose: 3000 });
+      formik.resetForm();
       dispatch(resetState());
     }
     if (isError) {
@@ -133,7 +134,7 @@ const AddProduct = () => {
     if (Object.keys(errors).length === 0) {
       formik.handleSubmit();
     } else {
-      toast.error("All the field is required!", { autoClose: 3000 });
+      toast.error("All fields are required!", { autoClose: 3000 });
     }
   };
 
@@ -345,13 +346,13 @@ const AddProduct = () => {
                       <label htmlFor="desc" className="form-label required">
                         Description
                       </label>
-                      <ReactQuill
-                        theme="snow"
+                      <textarea
                         name="description"
-                        onChange={(val) =>
-                          formik.setFieldValue("description", val)
-                        }
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                         value={formik.values.description}
+                        className="form-control"
+                        rows="4"
                       />
                       <div className="error">
                         {formik.touched.description &&
@@ -509,7 +510,7 @@ const AddProduct = () => {
                       {/* Refresh */}
                       <button
                         className="btn btn-lg btn-success border-0 rounded-3"
-                        type="submit"
+                        type="button"
                         style={{ marginLeft: "10px" }}
                         onClick={handleRefresh}
                       >

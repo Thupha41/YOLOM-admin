@@ -1,7 +1,5 @@
 import React from "react";
 import { Table } from "antd";
-//
-// import { getUsers } from "../features/cutomers/customerSlice";
 const columns = [
   {
     title: "SNo",
@@ -27,22 +25,8 @@ const columns = [
 ];
 
 const Customers = () => {
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(getUsers());
-  // }, []);
-  // const customerstate = useSelector((state) => state.customer.customers);
   const data1 = [];
-  for (let i = 0; i < 10; i++) {
-    // if (customerstate[i].role !== "admin") {
-    //   data1.push({
-    //     key: i + 1,
-    //     name: customerstate[i].firstname + " " + customerstate[i].lastname,
-    //     email: customerstate[i].email,
-    //     mobile: customerstate[i].mobile,
-    //   });
-    // }
-  }
+  for (let i = 0; i < 10; i++) {}
 
   return (
     <div>
