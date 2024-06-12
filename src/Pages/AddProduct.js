@@ -63,7 +63,7 @@ const AddProduct = () => {
   const productState = useSelector((state) => state.product.products);
   const newProduct = useSelector((state) => state.product);
   const { isSuccess, isError, createdProduct } = newProduct;
-
+  console.log("cata", catState);
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -187,6 +187,8 @@ const AddProduct = () => {
           <Option value="Beige">Beige</Option>
           <Option value="Green">Green</Option>
           <Option value="Purple">Purple</Option>
+          <Option value="Brown">Brown</Option>
+          <Option value="Yellow">Yellow</Option>
         </Select>
       ),
     },
@@ -420,7 +422,7 @@ const AddProduct = () => {
                         >
                           <option value="">Select Catalogue</option>
                           {catState.map((catalogue, index) => (
-                            <option key={index} value={catalogue.Catalogue_id}>
+                            <option key={index} value={catalogue.catalogue_id}>
                               {catalogue.name}
                             </option>
                           ))}
@@ -474,7 +476,7 @@ const AddProduct = () => {
               <div className="col-md-3 gap-3 d-flex flex-column-reverse flex-md-column mb-md-0 mb-5">
                 <div className="card">
                   <div className="card-header">
-                    <h5 className="card-title">Publish</h5>
+                    <h5 className="card-title">Action</h5>
                   </div>
                   <div className="card-body">
                     <div className="btn-list">

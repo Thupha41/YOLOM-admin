@@ -142,13 +142,14 @@ const ProductList = () => {
     setTimeout(() => {
       let filtered = productState;
       if (search) {
-        filtered = filtered.filter(
-          (product) =>
-            product.Product?.product_name
-              .toLowerCase()
-              .includes(search.toLowerCase()) ||
-            product.sku_no.toLowerCase().includes(search.toLowerCase())
-        );
+        filtered = filtered.filter((product) => {
+          const productName = product.Product?.product_name || "";
+          const skuNo = product.sku_no || "";
+          return (
+            productName.toLowerCase().includes(search.toLowerCase()) ||
+            skuNo.toLowerCase().includes(search.toLowerCase())
+          );
+        });
       }
       if (brand) {
         filtered = filtered.filter(
@@ -296,6 +297,8 @@ const ProductList = () => {
               <Option value="COTTON ON">Cotton On</Option>
               <Option value="LEVI'S">Levi's</Option>
               <Option value="MLB">MLB</Option>
+              <Option value="PUMA">PUMA</Option>
+              <Option value="DSQUARED2">DSQUARED2</Option>
             </Select>
             <Search
               size="large"
